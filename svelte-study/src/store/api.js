@@ -44,14 +44,16 @@ const removeUser = async () => {
 };
 
 const getAllTimetable = async () => {
-    return callApi({ method: "GET", path: "/" });
+    return callApi({ method: "GET", path: "/timetables" });
 };
 
 const getTimetableById = async (userId) => {
-    return callApi({ method: "GET", path: `/${ userId }` });
+    return callApi({ method: "GET", path: `/timetables/${ userId }` });
 };
 
 export {
     addUser,
+    getTimetableById,
+    getAllTimetable
 };
 
