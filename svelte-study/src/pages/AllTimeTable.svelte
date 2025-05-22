@@ -15,7 +15,6 @@
         }
     }
 
-    // 최초 로드 시 불러오기
     fetchAllSchedules();
 </script>
 

@@ -1,20 +1,4 @@
-import { writable } from "svelte/store";
-import { addUser, getAllTimetable, getTimetableById } from "./api.js";
-
-function setCustomers() {
-    const { subscribe, set } = writable([]);
-
-    const fetch = async () => {
-        // const result = await getCustomers();
-        // console.log(result);
-        // set(result);
-    };
-
-    return {
-        subscribe,
-        fetch,
-    };
-}
+import { addSchedule, addUser, getAllTimetable, getTimetableById, patchTimetableById } from "./api.js";
 
 function setUsers() {
     const add = async (user) => {
@@ -35,12 +19,23 @@ function setTimetable() {
         return await getAllTimetable();
     };
 
+    const patchTimeTableById = async (
+        userId, schedule,
+    ) => {
+        return await patchTimetableById(userId, schedule);
+    };
+
+    const addTimetable = async (schedule) => {
+        return await addSchedule(schedule);
+    };
+
     return {
         getTimetableByUserId,
         getAllTimetables,
+        addTimetable,
+        patchTimeTableById,
     };
 }
 
-export const customers = setCustomers();
 export const users = setUsers();
 export const timetable = setTimetable();

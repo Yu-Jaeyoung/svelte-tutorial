@@ -1,16 +1,16 @@
 <script>
     export let allSchedules = [];
 
-    const days = ["Sun", "Mon", "Tue", "Wen", "Thur", "Fri", "Sat"];
-    const hours = Array.from({ length: 24 }, (_, i) => i);
+    const days = [ "Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat" ];
+    const hours = Array.from({ length: 14 }, (_, i) => i + 9); // 9~22
 
-    let convertMode = false; // 체크박스 상태
+    let convertMode = false;
 
     // 카운트 테이블 초기화
     let countMap = {};
     for (const day of days) {
         for (const hour of hours) {
-            countMap[`${day}_${hour}`] = 0;
+            countMap[`${ day }_${ hour }`] = 0;
         }
     }
 
@@ -18,22 +18,22 @@
     for (const item of allSchedules) {
         const { day, startTime, endTime } = item;
         for (let h = startTime; h < endTime; h++) {
-            countMap[`${day}_${h}`]++;
+            countMap[`${ day }_${ h }`]++;
         }
     }
 
     const maxCount = Math.max(...Object.values(countMap));
 
     function getBackgroundColor(day, hour) {
-        const key = `${day}_${hour}`;
+        const key = `${ day }_${ hour }`;
         const count = countMap[key];
 
         if (!convertMode) {
-            if (count === 0) return '#fff';
+            if (count === 0) return "#fff";
             const alpha = Math.min(1, count / maxCount);
-            return `rgba(33, 150, 243, ${alpha})`; // 진한 파란색
+            return `rgba(225, 236, 247, ${ alpha })`;
         } else {
-            return count === 0 ? '#e0e0e0' : '#fff'; // convert: 없는 곳만 회색
+            return count === 0 ? "#e1ecf7" : "#fff";
         }
     }
 </script>
@@ -42,14 +42,14 @@
     table {
         border-collapse: collapse;
         margin-top: 20px;
-        width: 100%;
+        width: 50%;
         text-align: center;
     }
 
     th, td {
         border: 1px solid #ccc;
         padding: 6px;
-        width: 40px;
+        width: 36px;
         height: 30px;
     }
 
@@ -67,7 +67,7 @@
 
 <div class="controls">
     <label>
-        <input type="checkbox" bind:checked={convertMode} />
+        <input type="checkbox" bind:checked={convertMode}/>
         일정이 없는 시간 보기 (Convert 모드)
     </label>
 </div>

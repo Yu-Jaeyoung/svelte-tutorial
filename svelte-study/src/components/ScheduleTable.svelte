@@ -1,9 +1,9 @@
 <script>
     // 요일과 시간 정의
-    export let userData = []; // 부모 컴포넌트 또는 fetch 함수에서 전달받는 데이터
+    export let userData = [];
 
-    const days = [ "Sun", "Mon", "Tue", "Wen", "Thur", "Fri", "Sat" ];
-    const hours = Array.from({ length: 24 }, (_, i) => i); // 0 ~ 23시
+    const days = [ "Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat" ];
+    const hours = Array.from({ length: 14 }, (_, i) => i + 9);
 
     // 해당 시간과 요일에 일정이 있는지 여부를 확인
     function isScheduled(day, hour) {
@@ -19,19 +19,19 @@
     table {
         border-collapse: collapse;
         margin-top: 20px;
-        width: 100%;
+        width: 50%;
         text-align: center;
     }
 
     th, td {
         border: 1px solid #ccc;
         padding: 6px;
-        width: 40px;
+        width: 36px;
         height: 30px;
     }
 
     .scheduled {
-        background-color: #6ec6ff;
+        background-color: #e1ecf7
     }
 </style>
 
@@ -49,8 +49,7 @@
         <tr>
             <td>{hour}</td>
             {#each days as day}
-                <td class:scheduleHighlight={isScheduled(day, hour)}
-                    class={isScheduled(day, hour) ? 'scheduled' : ''}></td>
+                <td class={isScheduled(day, hour) ? 'scheduled' : ''}></td>
             {/each}
         </tr>
     {/each}

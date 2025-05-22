@@ -1,5 +1,3 @@
-import { customers } from "./index.js";
-
 const callApi = async ({ method = "", path = "", data = {} } = {}) => {
     const commonUrl = "http://localhost:8080/api";
     const url = commonUrl + path;
@@ -30,17 +28,8 @@ const callApi = async ({ method = "", path = "", data = {} } = {}) => {
 };
 
 
-const getAllUser = async () => {
-    return callApi({ method: "GET", path: "/" });
-};
 const addUser = async (user) => {
     return callApi({ method: "POST", path: "/users", data: { ...user } });
-};
-const updateUser = async (user) => {
-    return callApi({ method: "PATCH", path: `/something/${ user.id }`, data: { ...user } });
-};
-const removeUser = async () => {
-    return callApi({ method: "DELETE", path: "/" });
 };
 
 const getAllTimetable = async () => {
@@ -51,9 +40,19 @@ const getTimetableById = async (userId) => {
     return callApi({ method: "GET", path: `/timetables/${ userId }` });
 };
 
+const patchTimetableById = async (userId, data) => {
+    return callApi({ method: "PATCH", path: `/timetables/${ userId }`, data: { ...data } });
+};
+
+const addSchedule = async (schedule) => {
+    return callApi({ method: "POST", path: `/timetables`, data: { ...schedule } });
+};
+
 export {
     addUser,
     getTimetableById,
-    getAllTimetable
+    getAllTimetable,
+    patchTimetableById,
+    addSchedule,
 };
 
