@@ -1,7 +1,7 @@
 <script>
     export let allSchedules = [];
 
-    const days = [ "Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat" ];
+    const days = [ 'Sun', 'Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat' ];
     const hours = Array.from({ length: 14 }, (_, i) => i + 9); // 9~22
 
     let convertMode = false;
@@ -29,11 +29,11 @@
         const count = countMap[key];
 
         if (!convertMode) {
-            if (count === 0) return "#fff";
+            if (count === 0) return '#fff';
             const alpha = Math.min(1, count / maxCount);
             return `rgba(225, 236, 247, ${ alpha })`;
         } else {
-            return count === 0 ? "#e1ecf7" : "#fff";
+            return count === 0 ? '#a4bacc' : '#fff';
         }
     }
 </script>

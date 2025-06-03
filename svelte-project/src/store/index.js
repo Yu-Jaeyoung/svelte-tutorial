@@ -1,4 +1,11 @@
-import { addSchedule, addUser, getAllTimetable, getTimetableById, patchTimetableById } from "./api.js";
+import {
+    addSchedule,
+    addUser,
+    deleteTimetableByIds,
+    getAllTimetable,
+    getTimetableById,
+    patchTimetableById,
+} from './api.js';
 
 function setUsers() {
     const add = async (user) => {
@@ -29,11 +36,16 @@ function setTimetable() {
         return await addSchedule(schedule);
     };
 
+    const deleteTimetableByIdAndTimetableId = async (userId, schedule) => {
+        return await deleteTimetableByIds(userId, schedule);
+    };
+
     return {
         getTimetableByUserId,
         getAllTimetables,
         addTimetable,
         patchTimeTableById,
+        deleteTimetableByIdAndTimetableId,
     };
 }
 

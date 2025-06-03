@@ -2,7 +2,7 @@
     // 요일과 시간 정의
     export let userData = [];
 
-    const days = [ "Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat" ];
+    const days = [ 'Sun', 'Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat' ];
     const hours = Array.from({ length: 14 }, (_, i) => i + 9);
 
     // 해당 시간과 요일에 일정이 있는지 여부를 확인

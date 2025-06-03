@@ -12,7 +12,6 @@
         const userInfo = { userNumber: number, userName: name };
 
         try {
-
             await addUser(userInfo);
         } catch (error) {
             console.error('사용자 추가 오류:', error);

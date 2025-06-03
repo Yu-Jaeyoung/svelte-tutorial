@@ -4,7 +4,7 @@
     <a href="/timetables/group">전체 시간표 확인</a>
     <a href="/timetables/new">시간표 추가</a>
     <a href="/timetables/personal/rough">시간표 수정</a>
-    <a href="/">시간표 삭제</a>
+    <a href="/timetables/personal/rough/remove">시간표 삭제</a>
 </div>
 
 <style>

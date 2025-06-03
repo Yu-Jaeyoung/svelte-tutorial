@@ -1,6 +1,6 @@
 <script>
-    import HeatmapTable from "../components/HeatmapTable.svelte";
-    import { timetable } from "../store/index.js";
+    import HeatmapTable from '../components/HeatmapTable.svelte';
+    import { timetable } from '../store/index.js';
 
     let allSchedules = [];
     let error = null;

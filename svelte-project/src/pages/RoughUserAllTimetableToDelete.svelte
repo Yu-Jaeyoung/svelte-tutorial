@@ -1,5 +1,4 @@
 <script>
-    import ScheduleTable from '../components/ScheduleTable.svelte';
     import { timetable } from '../store/index.js';
 
     let userId = '';
@@ -14,6 +13,7 @@
 
         try {
             const data = await timetable.getTimetableByUserId(userId);
+            console.log(typeof data);
             userData = Array.isArray(data) ? data : [];
         } catch (err) {
             error = err.message;
@@ -21,6 +21,12 @@
             loading = false;
         }
     }
+
+    async function deleteTimetable(index, updatedData) {
+        console.log('삭제 요청:', index, updatedData);
+        await timetable.deleteTimetableByIdAndTimetableId(userId, updatedData);
+    }
+
 </script>
 
 <div class="container">
@@ -33,15 +39,26 @@
         <p class="loading-message">로딩 중...</p>
     {:else if error}
         <p class="error-message" style="color: red;">{error}</p>
-    {:else if userData && userData.length === 0}
-        <p class="not-found-message">사용자를 찾을 수 없습니다.</p>
+    {:else if userData && Array.isArray(userData)}
+        <ul>
+            {#each userData as item, index}
+                <li class="schedule-item">
+                    <br>
+                    <span>
+                            요일: {item.day}, 시작 시간: {item.startTime}:00, 종료 시간: {item.endTime}:00
+                        </span>
+                    <button class="save-button" on:click={() => deleteTimetable(userId, item)}>삭제</button>
+                </li>
+            {/each}
+        </ul>
     {:else if userData}
-        <ScheduleTable {userData}/>
+        {userData}
     {/if}
 </div>
 
 <style>
     .container {
+        background-color: #E1ECF7;
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -88,9 +105,40 @@
         margin-bottom: 10px;
     }
 
-    .not-found-message {
-        text-align: center;
-        color: #999;
+    .schedule-item {
+        border: 1px solid #ddd;
+        border-radius: 4px;
         padding: 10px;
+        margin-bottom: 10px;
+        background-color: white;
+    }
+
+    .edit-button {
+        background-color: #28a745;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    .save-button {
+        background-color: #007bff;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        margin-right: 5px;
+    }
+
+    .cancel-button {
+        background-color: #dc3545;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
     }
 </style>
