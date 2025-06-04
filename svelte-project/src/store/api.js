@@ -40,8 +40,8 @@ const getTimetableById = async (userId) => {
     return callApi({ method: 'GET', path: `/timetables/${ userId }` });
 };
 
-const patchTimetableById = async (userId, data) => {
-    return callApi({ method: 'PATCH', path: `/timetables/${ userId }`, data: { ...data } });
+const patchTimetableById = async (data) => {
+    return callApi({ method: 'PATCH', path: `/timetables/${ data.id }`, data: { ...data } });
 };
 
 const deleteTimetableByIds = async (userId, data) => {

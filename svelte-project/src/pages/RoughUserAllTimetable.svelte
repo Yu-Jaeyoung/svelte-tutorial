@@ -34,7 +34,7 @@
 
     async function updateTimetable(index, updatedData) {
         console.log('업데이트 요청:', index, updatedData);
-        await timetable.patchTimeTableById(userId, updatedData);
+        await timetable.patchTimeTableById(updatedData);
         toggleEditMode(index); // 업데이트 후 수정 모드 해제
     }
 
@@ -55,8 +55,6 @@
         <ul>
             {#each userData as item, index}
                 <li class="schedule-item">
-                    <b>ID:</b> {item.id} (수정 불가)
-                    <br>
                     {#if editMode[index]}
                         <label>
                             요일:

@@ -27,9 +27,9 @@ function setTimetable() {
     };
 
     const patchTimeTableById = async (
-        userId, schedule,
+        schedule,
     ) => {
-        return await patchTimetableById(userId, schedule);
+        return await patchTimetableById(schedule);
     };
 
     const addTimetable = async (schedule) => {

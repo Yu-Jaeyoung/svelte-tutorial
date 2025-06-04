@@ -1,5 +1,6 @@
 <script>
     import { addUser } from '../../../store/api.js';
+    import HomeButton from '../../../components/HomeButton.svelte';
 
     let number = '';
     let name = '';
@@ -21,9 +22,7 @@
     }
 </script>
 
-<p>
-    <a href="/" class="timetable-button">처음으로</a>
-</p>
+<HomeButton/>
 
 <form on:submit={handleSubmit}>
     <h2>사용자 등록</h2>
