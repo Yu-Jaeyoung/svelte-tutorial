@@ -18,10 +18,7 @@ const callApi = async ({ method = '', path = '', data = {} } = {}) => {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${ response.status }`);
         }
-        const responseData = await response.json();
-        console.log(options);
-        console.log(responseData);
-        return responseData;
+        return await response.json();
     } catch (error) {
         throw error;
     }
