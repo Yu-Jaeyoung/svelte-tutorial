@@ -9,6 +9,12 @@
     // 수정 모드 상태
     let editMode = {};
 
+    // startTime에 따라 endTime 옵션을 제한하기 위한 변수
+    let endTimeOptions = [];
+
+    // startTime이 선택되었는지 여부
+    let startTimeSelected = false;
+
     async function fetchUserData() {
         loading = true;
         error = null;
@@ -30,6 +36,11 @@
 
     function toggleEditMode(index) {
         editMode[index] = !editMode[index];
+        // 수정 모드 진입 시 endTimeOptions 초기화
+        if (editMode[index]) {
+            startTimeSelected = false; // 수정 모드 진입 시 startTimeSelected 초기화
+            endTimeOptions[index] = [];
+        }
     }
 
     async function updateTimetable(index, updatedData) {
@@ -71,7 +82,10 @@
                         <br>
                         <label>
                             시작 시간:
-                            <select bind:value={item.startTime}>
+                            <select bind:value={item.startTime} on:change={() => {
+                                startTimeSelected = true;
+                                endTimeOptions[index] = Array.from({ length: 14 }, (_, i) => i + 9).filter(hour => hour > item.startTime);
+                            }}>
                                 {#each hours as hour}
                                     <option value={hour}>{hour}:00</option>
                                 {/each}
@@ -80,11 +94,17 @@
                         <br>
                         <label>
                             종료 시간:
-                            <select bind:value={item.endTime}>
-                                {#each hours as hour}
-                                    <option value={hour}>{hour}:00</option>
-                                {/each}
-                            </select>
+                            {#if startTimeSelected}
+                                <select bind:value={item.endTime}>
+                                    {#each endTimeOptions[index] as hour}
+                                        <option value={hour}>{hour}:00</option>
+                                    {/each}
+                                </select>
+                            {:else}
+                                <select disabled>
+                                    <option value="">시작 시간을 먼저 선택하세요</option>
+                                </select>
+                            {/if}
                         </label>
                         <br>
                         <button class="save-button" on:click={() => updateTimetable(index, item)}>저장</button>
