@@ -45,8 +45,15 @@
 
         try {
             await timetable.addTimetable(schedule);
+            alert('시간표 추가가 완료되었습니다.'); // 성공 알림 추가
+            // 입력 필드 초기화
+            studentId = '';
+            startTime = 9;
+            endTime = 10;
+            week = weekNumber;
         } catch (error) {
             console.error(error);
+            alert('시간표 추가에 실패했습니다.'); // 실패 알림 추가
         }
     }
 

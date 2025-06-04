@@ -22,9 +22,17 @@
         }
     }
 
-    async function deleteTimetable(index, updatedData) {
-        console.log('삭제 요청:', index, updatedData);
-        await timetable.deleteTimetableByIdAndTimetableId(userId, updatedData);
+    async function deleteTimetable(userId, item) {
+        console.log('삭제 요청:', userId, item);
+        try {
+            await timetable.deleteTimetableByIdAndTimetableId(userId, item);
+            alert('삭제 성공');
+            // 삭제 후 데이터 다시 가져오기
+            await fetchUserData();
+        } catch (err) {
+            console.error('삭제 오류:', err);
+            alert('삭제 실패: ' + err.message);
+        }
     }
 
 </script>

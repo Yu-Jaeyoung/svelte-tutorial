@@ -4,19 +4,25 @@
 
     let number = '';
     let name = '';
-    let errorMessage;
+    let errorMessage = '';
+    let successMessage = ''; // 성공 메시지 상태 변수
 
     async function handleSubmit(event) {
         errorMessage = '';
+        successMessage = ''; // 성공 메시지 초기화
         event.preventDefault();
 
         const userInfo = { userNumber: number, userName: name };
 
         try {
             await addUser(userInfo);
+            successMessage = '사용자 등록이 완료되었습니다.'; // 성공 메시지 설정
+            // 입력 필드 초기화 (선택 사항)
+            number = '';
+            name = '';
         } catch (error) {
             console.error('사용자 추가 오류:', error);
-            errorMessage = `사용자 추가 실패 ${ errorMessage }`;
+            errorMessage = `사용자 추가 실패: ${error.message}`;
             alert(errorMessage);
         }
     }
@@ -31,6 +37,9 @@
     <button type="submit">등록</button>
     {#if errorMessage}
         <p style="color: red;">{errorMessage}</p>
+    {/if}
+    {#if successMessage}
+        <p style="color: green;">{successMessage}</p>
     {/if}
 </form>
 
